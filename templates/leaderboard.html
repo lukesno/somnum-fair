@@ -18,12 +18,14 @@
             </thead>
             <tbody>
                 {% for item in leaderboard %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.averageHRV }}</td>
-                </tr>
-                {% endfor %}
+                {% if not item.name.startswith('Test') and not item.name.startswith('Nano') %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.averageHRV }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
     </div>

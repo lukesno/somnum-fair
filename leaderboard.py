@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from pymongo import MongoClient
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -32,7 +33,7 @@ def get_average_hrv():
         if session:
             leaderboard.append({
                 "name": session["first_name"] + " " + session["last_name"],
-                "averageHRV": entry["averageHRV"]
+                "averageHRV": round(entry["averageHRV"], 1)
             })
 
     return leaderboard
@@ -44,4 +45,4 @@ def leaderboard():
     return render_template('leaderboard.html', leaderboard=data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8082)
